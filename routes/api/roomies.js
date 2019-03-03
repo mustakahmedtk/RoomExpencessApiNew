@@ -10,7 +10,7 @@ router.post('/createRoomie', async (req, res) => {
         const foundUser = await User.findOne({ _id: req.body.user_id })
         if (foundUser) {
             if (foundUser.role === "admin") {
-             const foundRoomie = await Roomie.findOne({ name: req.body.name })
+                const foundRoomie = await Roomie.findOne({ name: req.body.name })
                 if (!foundRoomie) {
                     const newRoomie = new Roomie(req.body)
                     const user_add = {
@@ -21,8 +21,8 @@ router.post('/createRoomie', async (req, res) => {
                         role: req.body.role
                     }
                     const newUser = new User(user_add);
-                     newRoomie.save().then(() => {
-                         newUser.save((err, result) => {
+                    newRoomie.save().then(() => {
+                        newUser.save((err, result) => {
                             if (!err) {
                                 res.status(200).json({ success: "new roomie saved as a user", role: "roomie" })
                             }
@@ -46,6 +46,17 @@ router.post('/createRoomie', async (req, res) => {
     }
 
 
+})
+
+router.get("/getAllRoomie",async (req,res)=>{
+    try{
+        const allRoomie= await Roomie.find({user_id:req.query.user_id})
+        res.json(allRoomie)
+    }
+    catch(err){
+        console.log(err)
+    }
+      
 })
 
 
