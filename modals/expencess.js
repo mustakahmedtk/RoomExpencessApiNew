@@ -6,11 +6,11 @@ const expencessSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    roomie_id: {
+    item: {
         type: String,
         required: true
     },
-    item: {
+    name: {
         type: String,
         required: true
     },
@@ -20,6 +20,10 @@ const expencessSchema = new mongoose.Schema({
     },
     date: {
         type: Date,
+        required: true
+    },
+    room_id: {
+        type: String,
         required: true
     }
 

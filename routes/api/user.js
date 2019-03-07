@@ -30,7 +30,7 @@ router.get('/getUserById', async (req, res) => {
 
 })
 
-router.delete('/removeUserById', async (req, res) => {
+router.post('/removeUserById', async (req, res) => {
     try {
         await User.findByIdAndDelete(req.body.id, (err, result) => {
             if (!err) {
@@ -57,6 +57,8 @@ router.put('/updateUserById', async (req, res) => {
     }
 
 })
+
+
 
 
 module.exports = router;

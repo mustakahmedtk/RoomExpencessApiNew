@@ -7,7 +7,7 @@ const Roomie = require('../../modals/roomies')
 
 router.post('/createRoomie', async (req, res) => {
     try {
-        const foundUser = await User.findOne({ _id: req.body.user_id })
+        const foundUser = await User.findOne({ _id: req.body.room_id })
         if (foundUser) {
             if (foundUser.role === "admin") {
                 const foundRoomie = await Roomie.findOne({ name: req.body.name })
@@ -50,13 +50,27 @@ router.post('/createRoomie', async (req, res) => {
 
 router.get("/getAllRoomie",async (req,res)=>{
     try{
-        const allRoomie= await Roomie.find({user_id:req.query.user_id})
+        const allRoomie= await Roomie.find({room_id:req.query.user_id})
         res.json(allRoomie)
     }
     catch(err){
         console.log(err)
     }
       
+})
+
+router.post('/removeRoomie', async (req, res) => {
+    try {
+        await Roomie.findByIdAndDelete(req.body.id, (err, result) => {
+            if (!err) {
+                res.send('user removed successfully')
+            }
+        })
+    }
+    catch (err) {
+        console.log(err)
+    }
+
 })
 
 
